@@ -1,0 +1,70 @@
+name: Lint and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  BUN_VERSION: 1.2.19
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - name: Run Linting
+        run: bunx biome lint .
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - name: Check Formatting
+        run: bunx biome format .
+
+  types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - run: bun install
+      - name: Generate Prisma Client
+        run: bun prisma-generate
+      - name: Check Types
+        run: bun typecheck
+
+  migrations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - run: bun install
+      - name: Generate Prisma Client
+        run: bun prisma-generate
+      - name: Check migrations
+        run: bun prisma-check-migrations
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - run: bun install
+      - name: Generate Prisma Client
+        run: bun prisma-generate
+      - name: Run tests
+        run: bun test

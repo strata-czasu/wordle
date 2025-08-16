@@ -10,6 +10,8 @@
     "start": "NODE_ENV=production bun src/index.tsx",
     "start:prod": "bun prisma-migrate-deploy && NODE_ENV=production bun seed && NODE_ENV=production bun src/index.tsx",
     "seed": "bun run seed.ts",
+    "fix": "biome check --write",
+    "typecheck": "tsc --build",
     "prisma-studio": "prisma studio --port 5556",
     "prisma-generate": "prisma generate",
     "prisma-check-migrations": "prisma migrate deploy && prisma migrate diff --exit-code --from-schema-datamodel ./prisma/ --to-schema-datasource ./prisma/",
