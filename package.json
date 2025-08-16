@@ -42,6 +42,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/bun": "^1.2.19",
+    "lefthook": "^1.12.2",
     "typescript": "^5.8.3"
   }
 }
