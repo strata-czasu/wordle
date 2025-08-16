@@ -1,0 +1,15 @@
+node_modules/
+*.tsbuildinfo
+
+*.db
+*.db-journal
+
+words.json
+wordlist.json
+
+.env
+
+.direnv/
+.envrc.local
+
+.DS_Store

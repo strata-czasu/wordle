@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "warn"
+      },
+      "complexity": {
+        "useLiteralKeys": "info"
+      }
+    }
+  },
+  "formatter": {
+    "lineWidth": 88,
+    "enabled": true,
+    "indentStyle": "space",
+    "ignore": ["src/frontend/valid_words.json"]
+  }
+}
