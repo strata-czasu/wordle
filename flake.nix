@@ -38,6 +38,7 @@
               prisma
               prisma-engines
               pkgs.openssl
+              pkgs.cloudflared
             ];
             shellHook = ''
               export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib"
