@@ -1,4 +1,4 @@
-ARG BUN_VERSION=1.2.19
+ARG BUN_VERSION=1.3.9
 
 FROM oven/bun:${BUN_VERSION}-slim
 

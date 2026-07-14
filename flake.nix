@@ -30,7 +30,7 @@
         {
           default = pkgs.mkShell {
             packages = [
-              bun."1.2.19"
+              bun."1.3.9"
               pkgs.prisma_6
               pkgs.prisma-engines_6
               pkgs.openssl
