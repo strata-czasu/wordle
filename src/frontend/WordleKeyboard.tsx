@@ -130,9 +130,9 @@ const KeyboardKey = React.memo(function KeyboardKey({
         "min-w-9 sm:min-w-10 h-11 sm:h-12 flex items-center justify-center rounded font-bold text-white transition-colors hover:opacity-70 active:scale-95 text-xs sm:text-sm",
         {
           "bg-green-500": state === "correct",
-          "bg-yellow-500": state === "present",
+          "bg-yellow-400": state === "present",
           "bg-gray-500": state === "absent",
-          "bg-gray-700": state === "pending",
+          "border-2 border-gray-500": state === "pending",
         },
         className,
       ])}

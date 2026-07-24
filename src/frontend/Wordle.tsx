@@ -264,7 +264,7 @@ function Cell({ letter, state }: CellProps) {
       className={clsx([
         "cell w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center select-none",
         state === "correct" && "bg-green-500",
-        state === "present" && "bg-yellow-500",
+        state === "present" && "bg-yellow-400",
         state === "absent" && "bg-gray-500",
         state === "pending" && "border-2 border-gray-500",
       ])}
