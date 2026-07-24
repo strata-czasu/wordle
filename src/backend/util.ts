@@ -1,5 +1,5 @@
+import env from "@/env";
 import type { BunRequest } from "bun";
-import env from "env";
 import { jwtVerify } from "jose";
 import * as v from "valibot";
 import { UnauthorizedError } from "./error";

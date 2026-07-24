@@ -1,3 +1,4 @@
+import env from "@/env";
 import { REST } from "@discordjs/rest";
 import type { BunRequest } from "bun";
 import { add } from "date-fns";
@@ -7,7 +8,6 @@ import {
   type RESTPostOAuth2AccessTokenResult,
   Routes,
 } from "discord-api-types/v10";
-import env from "env";
 import * as jose from "jose";
 import * as v from "valibot";
 import { authenticateRequest } from "./util";

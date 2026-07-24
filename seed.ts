@@ -1,6 +1,6 @@
 import { WORDLE_WORD_LENGTH } from "@/constants";
 import { prisma } from "@/db";
-import env from "env";
+import env from "@/env";
 
 const isProduction = process.env.NODE_ENV === "production";
 
