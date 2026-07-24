@@ -5,6 +5,16 @@ export abstract class ApiError extends Error {
   abstract json(): object;
 }
 
+export class AuthTokenExchangeError extends ApiError {
+  constructor(readonly status: number) {
+    super();
+  }
+
+  json() {
+    return { message: "Failed to exchange Discord authorization code for token" };
+  }
+}
+
 export class NotFoundError extends ApiError {
   status = 404;
 

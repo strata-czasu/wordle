@@ -1,10 +1,10 @@
-import { exchangeCodeForAccessToken, getBackendAccessToken } from "@/api/auth";
+import { exchangeCodeForAccessTokens } from "@/api/auth";
 import {
   DiscordSDK,
   DiscordSDKMock,
   type IDiscordSDK,
 } from "@discord/embedded-app-sdk";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { getAuthorizationCode } from "./discordApi";
 
 const OAUTH_CLIENT_ID = process.env.WORDLE_PUBLIC_OAUTH_CLIENT_ID;
@@ -51,6 +51,11 @@ export function useDiscordSdk(sdkMode: DiscordSDKMode): UseDiscordSDKReturn {
   const [authSession, setAuthSession] = useState<AuthSession | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
+  const setAuthState = useCallback((authSession: AuthSession, accessToken: string) => {
+    setAuthSession(authSession);
+    setAccessToken(accessToken);
+  }, []);
+
   const authenticate = async () => {
     if (!discordSdk.guildId) {
       throw new Error("Discord SDK is not initialized with a guild ID");
@@ -59,27 +64,22 @@ export function useDiscordSdk(sdkMode: DiscordSDKMode): UseDiscordSDKReturn {
     const authorizationCode = await getAuthorizationCode(discordSdk);
     console.log("Authorization code received");
 
-    let discordAccessToken: string;
     if (sdkMode === "mock") {
-      discordAccessToken = "MOCK_ACCESS_TOKEN";
-      console.log("Using mock access token");
-    } else {
-      discordAccessToken = await exchangeCodeForAccessToken(authorizationCode);
-      console.log("Access token received");
+      console.log("Authenticating with mock credentials");
     }
 
+    // Backend uses a mocked Discord access token, but still signs a JWT for its API
+    const { discordAccessToken, backendAccessToken } =
+      await exchangeCodeForAccessTokens(authorizationCode, discordSdk.guildId);
+    console.log("Access tokens received");
+
+    // Under "mock" mode, `authenticate()` doesn't check the token
     const session = await discordSdk.commands.authenticate({
       access_token: discordAccessToken,
     });
     console.log(`Authenticated user ${session.user.username} (${session.user.id})`);
-    setAuthSession(session);
 
-    const backendToken = await getBackendAccessToken(
-      discordAccessToken,
-      discordSdk.guildId,
-    );
-    console.log("Backend access token received");
-    setAccessToken(backendToken);
+    setAuthState(session, backendAccessToken);
 
     return session;
   };

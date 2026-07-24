@@ -1,8 +1,10 @@
 import * as v from "valibot";
 
+const DiscordSDKMode = v.union([v.literal("mock"), v.literal("live")]);
 const ID = v.pipe(v.string(), v.regex(/^\d{17,19}$/));
 
 const Env = v.object({
+  WORDLE_PUBLIC_DISCORD_SDK_MODE: DiscordSDKMode,
   WORDLE_PUBLIC_OAUTH_CLIENT_ID: ID,
   WORDLE_OAUTH_CLIENT_SECRET: v.string(),
   WORDLE_JWT_SECRET: v.string(),

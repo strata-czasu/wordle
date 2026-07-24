@@ -4,7 +4,8 @@ import { useLayoutEffect, useState } from "react";
 import Wordle from "./Wordle";
 import { type DiscordSDKMode, useDiscordSdk } from "./sdk";
 
-const SDK_MODE: DiscordSDKMode = "live";
+const SDK_MODE =
+  (process.env.WORDLE_PUBLIC_DISCORD_SDK_MODE as DiscordSDKMode | undefined) ?? "live";
 
 export function App() {
   const { discordSdk, authSession, accessToken, authenticate } =
