@@ -34,6 +34,22 @@ describe("validateGuess", () => {
     expect(absent).toHaveLength(1);
     expect(absent).toContain("d");
   });
+  test("correct overrides present", () => {
+    const { correct, present, absent } = validateGuess("manage", "dosage");
+
+    expect(correct).toHaveLength(3);
+    expect(correct).toContainEqual({ letter: "a", position: 3 });
+    expect(correct).toContainEqual({ letter: "g", position: 4 });
+    expect(correct).toContainEqual({ letter: "e", position: 5 });
+
+    // "a" at position 1 is technically present,
+    // but we've already guessed the only "a" at position 3
+    expect(present).toHaveLength(0);
+
+    expect(absent).toHaveLength(2);
+    expect(absent).toContain("m");
+    expect(absent).toContain("n");
+  });
 });
 
 describe("mergeKnownLetters", () => {
