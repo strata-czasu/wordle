@@ -30,12 +30,12 @@
       "language_servers": [
         "!typescript-language-server",
         "!prisma-language-server",
-        "!tailwindcss-language-server",
         "!eslint",
         "!prettier",
         "!vtsls",
         "tsgo",
         "biome",
+        "tailwindcss-language-server",
         "..."
       ],
       "formatter": { "language_server": { "name": "biome" } },
