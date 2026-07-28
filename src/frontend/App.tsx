@@ -3,6 +3,7 @@ import "./index.css";
 import { useLayoutEffect, useState } from "react";
 import Wordle from "./Wordle";
 import { type DiscordSDKMode, useDiscordSdk } from "./sdk";
+import { SocialSidebar } from "./social/Social";
 
 const SDK_MODE =
   (process.env.WORDLE_PUBLIC_DISCORD_SDK_MODE as DiscordSDKMode | undefined) ?? "live";
@@ -30,13 +31,24 @@ export function App() {
   });
 
   return (
+    // TODO)) Ensure we're never overflowing - shrink the whole page if needed for smaller screens
     <div className="w-full h-screen p-2 sm:p-4 md:p-8 text-center flex flex-col justify-center">
       {discordSdk.guildId && authSession && accessToken ? (
-        <Wordle
-          guildId={discordSdk.guildId}
-          userId={authSession.user.id}
-          accessToken={accessToken}
-        />
+        <div className="grid grid-cols-[1fr_auto_1fr] gap-2">
+          {/* TODO)) Hide sidebar on mobile screens */}
+          <div>
+            <SocialSidebar accessToken={accessToken} />
+          </div>
+          <div>
+            <Wordle
+              guildId={discordSdk.guildId}
+              userId={authSession.user.id}
+              accessToken={accessToken}
+            />
+          </div>
+          {/* NOTE: 3rd grid column just to balance out the layout */}
+          <div />
+        </div>
       ) : (
         <div>
           <div className="text-3xl sm:text-4xl md:text-5xl mb-4">Wordle</div>

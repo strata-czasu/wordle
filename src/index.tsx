@@ -3,6 +3,7 @@ import * as v from "valibot";
 import { authApi } from "./backend/auth";
 import { ApiError } from "./backend/error";
 import { gameApi } from "./backend/game";
+import { socialApi } from "./backend/social";
 import index from "./frontend/index.html";
 
 const server = serve({
@@ -13,6 +14,7 @@ const server = serve({
     // API routes
     ...authApi,
     ...gameApi,
+    ...socialApi,
   },
 
   error(error) {
