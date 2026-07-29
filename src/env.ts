@@ -10,6 +10,8 @@ const Env = v.object({
   WORDLE_JWT_SECRET: v.string(),
   WORDLE_DATABASE_URL: v.pipe(v.string(), v.url()),
   WORDLE_AVAILABLE_WORDS_FILE: v.optional(v.string()),
+  HOST: v.optional(v.string()),
+  PORT: v.optional(v.string()),
   TZ: v.optional(v.string()),
 });
 

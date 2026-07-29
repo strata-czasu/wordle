@@ -4,6 +4,7 @@ import { authApi } from "./backend/auth";
 import { ApiError } from "./backend/error";
 import { gameApi } from "./backend/game";
 import { socialApi } from "./backend/social";
+import env from "./env";
 import index from "./frontend/index.html";
 
 const server = serve({
@@ -38,7 +39,8 @@ const server = serve({
     console: true,
   },
 
-  port: 3000,
+  hostname: env.HOST ?? "127.0.0.1",
+  port: env.PORT ?? 3000,
 });
 
-console.log(`Listening on http://${server.hostname}:${server.port}`);
+console.log(`Listening on ${server.url}`);
