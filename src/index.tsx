@@ -12,6 +12,8 @@ const server = serve({
     // Serve index.html for all unmatched routes.
     "/*": index,
 
+    "/health": () => Response.json({ status: "ok" }),
+
     // API routes
     ...authApi,
     ...gameApi,
