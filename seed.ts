@@ -11,12 +11,14 @@ const GUILDS = {
 } as const;
 
 async function loadWordList(): Promise<string[] | null> {
-  const wordsFile = Bun.file(env.WORDLE_AVAILABLE_WORDS_FILE ?? "words.json");
+  if (!env.WORDLE_AVAILABLE_WORDS_FILE) return null;
+
+  const wordsFile = Bun.file(env.WORDLE_AVAILABLE_WORDS_FILE);
   let parsedWords: string[];
   try {
     parsedWords = await wordsFile.json();
   } catch (error) {
-    console.error("Failed to load words.json:", error);
+    console.error("Failed to load wordslist:", error);
     return null;
   }
 
