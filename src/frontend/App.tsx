@@ -6,6 +6,7 @@ import { type DiscordSDKMode, useDiscordSdk } from "./sdk";
 import { SocialSidebar } from "./social/Social";
 
 const SDK_MODE =
+  // FIXME)) When unset, this throws "ReferenceError: process is not defined" in the browser
   (process.env.WORDLE_PUBLIC_DISCORD_SDK_MODE as DiscordSDKMode | undefined) ?? "live";
 
 export function App() {
