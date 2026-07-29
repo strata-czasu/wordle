@@ -8,8 +8,8 @@ import { useCallback, useState } from "react";
 import { getAuthorizationCode } from "./discordApi";
 
 const OAUTH_CLIENT_ID = process.env.WORDLE_PUBLIC_OAUTH_CLIENT_ID;
-const MOCK_GUILD_ID = process.env.WORDLE_PUBLIC_MOCK_GUILD_ID;
-const MOCK_CHANNEL_ID = process.env.WORDLE_PUBLIC_MOCK_CHANNEL_ID;
+const MOCK_GUILD_ID = process.env.WORDLE_PUBLIC_MOCK_GUILD_ID ?? null;
+const MOCK_CHANNEL_ID = process.env.WORDLE_PUBLIC_MOCK_CHANNEL_ID ?? null;
 
 export type DiscordSDKMode = "mock" | "live";
 
