@@ -6,6 +6,10 @@ const isProduction = process.env.NODE_ENV === "production";
 
 const GUILDS = {
   StrataCzasu: { guildId: "211261411119202305", ownerId: "211260587038998528" },
+  StrataCzasuSupportTeam: {
+    guildId: "1198978337150881812",
+    ownerId: "211260587038998528",
+  },
   Piwnica: { guildId: "342022299957854220", ownerId: "195935967440404480" },
   Homik: { guildId: "1110671571384803350", ownerId: "503299438757019659" },
 } as const;
