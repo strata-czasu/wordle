@@ -14,7 +14,7 @@ import { AuthTokenExchangeError } from "./error";
 import { authenticateRequest } from "./util";
 
 console.log("[auth] Using Discord SDK mode:", env.WORDLE_PUBLIC_DISCORD_SDK_MODE);
-console.log("[auth] Using OAuth client ID:", env.WORDLE_PUBLIC_OAUTH_CLIENT_ID);
+console.log("[auth] Using OAuth client ID:", env.WORDLE_PUBLIC_APPLICATION_ID);
 
 const ApiTokenRequestSchema = v.object({
   code: v.string(),
@@ -53,7 +53,7 @@ export const authApi = {
       const jwtSecret = new TextEncoder().encode(env.WORDLE_JWT_SECRET);
       const backendAccessToken = await new jose.SignJWT({ userId, guildId })
         .setProtectedHeader({ alg: "HS256" })
-        .setIssuer(env.WORDLE_PUBLIC_OAUTH_CLIENT_ID)
+        .setIssuer(env.WORDLE_PUBLIC_APPLICATION_ID)
         .setIssuedAt()
         .setExpirationTime(jwtExpiry)
         .sign(jwtSecret);
@@ -88,7 +88,7 @@ async function exchangeAuthorizationCode(code: string): Promise<string> {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     body: new URLSearchParams({
-      client_id: env.WORDLE_PUBLIC_OAUTH_CLIENT_ID,
+      client_id: env.WORDLE_PUBLIC_APPLICATION_ID,
       client_secret: env.WORDLE_OAUTH_CLIENT_SECRET,
       grant_type: "authorization_code",
       code,

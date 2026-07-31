@@ -7,7 +7,7 @@ import {
 import { useCallback, useState } from "react";
 import { getAuthorizationCode } from "./discordApi";
 
-const OAUTH_CLIENT_ID = process.env.WORDLE_PUBLIC_OAUTH_CLIENT_ID;
+const OAUTH_CLIENT_ID = process.env.WORDLE_PUBLIC_APPLICATION_ID;
 // FIXME)) When unset, these throw "ReferenceError: process is not defined" in the browser
 const MOCK_GUILD_ID = process.env.WORDLE_PUBLIC_MOCK_GUILD_ID;
 const MOCK_CHANNEL_ID = process.env.WORDLE_PUBLIC_MOCK_CHANNEL_ID;
@@ -30,7 +30,7 @@ export type UseDiscordSDKReturn = {
 export function useDiscordSdk(sdkMode: DiscordSDKMode): UseDiscordSDKReturn {
   const [discordSdk] = useState(() => {
     if (!OAUTH_CLIENT_ID) {
-      throw new Error("WORDLE_PUBLIC_OAUTH_CLIENT_ID is not set");
+      throw new Error("WORDLE_PUBLIC_APPLICATION_ID is not set");
     }
 
     if (sdkMode === "live") {

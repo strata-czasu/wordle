@@ -3,6 +3,7 @@ import * as v from "valibot";
 import { authApi } from "./backend/auth";
 import { ApiError } from "./backend/error";
 import { gameApi } from "./backend/game";
+import { interactionsApi } from "./backend/interactions";
 import { socialApi } from "./backend/social";
 import env from "./env";
 import index from "./frontend/index.html";
@@ -18,6 +19,9 @@ const server = serve({
     ...authApi,
     ...gameApi,
     ...socialApi,
+
+    // Discord interactions endpoint
+    ...interactionsApi,
   },
 
   error(error) {
