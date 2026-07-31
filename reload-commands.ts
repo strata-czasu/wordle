@@ -1,6 +1,6 @@
 import env from "@/env";
 import { REST } from "@discordjs/rest";
-import { Routes } from "discord-api-types/v10";
+import { InteractionContextType, Routes } from "discord-api-types/v10";
 import {
   ApplicationCommandType,
   type RESTPostAPIChatInputApplicationCommandsJSONBody,
@@ -11,11 +11,13 @@ const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [
     type: ApplicationCommandType.ChatInput,
     name: "wordle",
     description: "Graj w Wordle",
+    contexts: [InteractionContextType.Guild],
   },
   {
     type: ApplicationCommandType.ChatInput,
     name: "share",
     description: "Udostępnij swój dzisiejszy wynik Wordle",
+    contexts: [InteractionContextType.Guild],
   },
 ] as const;
 

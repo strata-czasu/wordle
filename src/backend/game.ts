@@ -100,7 +100,7 @@ export const gameApi = {
   },
 };
 
-function getCurrentGame(
+export function getCurrentGame(
   userId: string,
   guildId: string,
 ): Promise<GameWithGuesses | null> {

@@ -1,6 +1,7 @@
 import { getCurrentGame, startNewGame, submitGuess } from "@/api/game";
 import type { GameDetail, GuessDetail } from "@/api/types";
 import { WORDLE_ATTEMPTS, WORDLE_WORD_LENGTH } from "@/constants";
+import { getShareText } from "@/util/sharing";
 import { clsx } from "clsx";
 import { isEqual } from "es-toolkit";
 import {
@@ -115,7 +116,7 @@ function WordleInner() {
 
   const onShareClick = () => {
     if (!gameData) return;
-    const shareText = getShareText(gameData);
+    const shareText = getShareText(gameData.guesses);
     navigator.clipboard
       .writeText(shareText)
       .then(() => {
@@ -141,6 +142,7 @@ function WordleInner() {
             <button
               type="button"
               className="px-4 py-2 text-white rounded bg-green-600 hover:bg-green-700 transition-colors whitespace-nowrap"
+              // TODO)) Share directly through Discord
               onClick={onShareClick}
             >
               Udostępnij
@@ -154,10 +156,10 @@ function WordleInner() {
               <textarea
                 className="resize-none w-full mt-2 text-black"
                 readOnly
-                rows={getShareText(gameData).split("\n").length}
+                rows={getShareText(gameData.guesses).split("\n").length}
                 cols={16}
               >
-                {getShareText(gameData)}
+                {getShareText(gameData.guesses)}
               </textarea>
             </div>
           )}
@@ -183,36 +185,6 @@ function WordleInner() {
       </div>
     </div>
   );
-}
-
-function getShareText({ guesses }: GameDetail): string {
-  const lines: string[] = [`Wordle (${guesses.length}/${WORDLE_ATTEMPTS})`];
-
-  for (const guess of guesses) {
-    const line: string[] = [];
-    for (const [idx, letter] of Array.from(guess.letters).entries()) {
-      const isCorrect = guess.correct.some(
-        (c) => c.letter === letter && c.position === idx,
-      );
-      if (isCorrect) {
-        line.push("🟩");
-        continue;
-      }
-
-      const isPresent = guess.present.some(
-        (c) => c.letter === letter && c.position === idx,
-      );
-      if (isPresent) {
-        line.push("🟨");
-        continue;
-      }
-
-      line.push("⬜");
-    }
-    lines.push(line.join(""));
-  }
-
-  return lines.join("\n");
 }
 
 type RowProps = {
