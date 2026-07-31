@@ -9,14 +9,18 @@
    1. "Overview" -> "General Information":
       - Application ID -> `WORDLE_PUBLIC_APPLICATION_ID` env
       - Public Key -> `WORDLE_APPLICATION_PUBLIC_KEY` env
-   2. "Overview" -> "OAuth2":
+   2. "Overview" -> "Installation":
+      - Installation Contexts -> enable "Guild Install"
+      - Default Install Settings -> Scopes -> Add only the `application.commands` scope
+      - Install Link -> copy the Discord provided link and install the app in your server
+   3. "Overview" -> "OAuth2":
       - Client Secret -> `WORDLE_OAUTH_CLIENT_SECRET` env
       - Add a redirect URI of `https://127.0.0.1`
-   3. "Overview" -> "Bot":
+   4. "Overview" -> "Bot":
       - Bot Token -> `WORDLE_BOT_TOKEN` env
-   4. "Activities" -> "Settings":
+   5. "Activities" -> "Settings":
       - Check "Enable Activities"
-   5. "Activities" -> "URL Mappings":
+   6. "Activities" -> "URL Mappings":
       - Point the root mapping to a public URL where your application will be exposed to, i.e. `https://your-domain.com`
 3. Set `WORDLE_BOT_COMMAND_GUILD_IDS` - app commands will be synced to these guilds only
 4. Set `WORDLE_SECRET_KEY` to a randomly generated string
