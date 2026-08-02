@@ -133,7 +133,7 @@ function WordleInner() {
       {gameData && gameData.state !== "inProgress" && (
         <div className="space-y-2 sm:space-y-4">
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-            <div className="text-lg sm:text-xl md:text-2xl text-center">
+            <div className="text-lg sm:text-xl text-center">
               {gameData.state === "solved"
                 ? `Gratulacje! 🎉 (${gameData.guesses.length}/${WORDLE_ATTEMPTS})`
                 : "Koniec gry 😭"}
@@ -234,7 +234,7 @@ function Cell({ letter, state }: CellProps) {
   return (
     <div
       className={clsx([
-        "cell w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center select-none",
+        "cell w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center select-none",
         state === "correct" && "bg-green-500",
         state === "present" && "bg-yellow-400",
         state === "absent" && "bg-gray-500",
@@ -242,9 +242,7 @@ function Cell({ letter, state }: CellProps) {
       ])}
     >
       {letter && (
-        <div className="text-2xl sm:text-3xl md:text-4xl font-bold uppercase">
-          {letter}
-        </div>
+        <div className="text-2xl sm:text-3xl font-bold uppercase">{letter}</div>
       )}
     </div>
   );
