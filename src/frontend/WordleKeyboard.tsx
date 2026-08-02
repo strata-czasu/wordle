@@ -87,7 +87,11 @@ function KeyboardRow({
   return (
     <div className="flex gap-0.5 sm:gap-1 justify-center w-full">
       {rowIndex === 2 && (
-        <KeyboardKey onClick={onEnter} className="px-2 sm:px-4 text-xs" state="pending">
+        <KeyboardKey
+          onClick={onEnter}
+          className="min-w-12 sm:min-w-18 text-xs"
+          state="pending"
+        >
           ENTER
         </KeyboardKey>
       )}
@@ -101,7 +105,11 @@ function KeyboardRow({
         </KeyboardKey>
       ))}
       {rowIndex === 2 && (
-        <KeyboardKey onClick={onBackspace} className="px-2 sm:px-4" state="pending">
+        <KeyboardKey
+          onClick={onBackspace}
+          className="min-w-12 sm:min-w-18 text-xs"
+          state="pending"
+        >
           ⌫
         </KeyboardKey>
       )}
@@ -127,7 +135,7 @@ const KeyboardKey = React.memo(function KeyboardKey({
       type="button"
       onClick={onClick}
       className={clsx([
-        "min-w-9 sm:min-w-10 h-11 sm:h-12 flex items-center justify-center rounded font-bold text-white transition-colors hover:opacity-70 active:scale-95 text-xs sm:text-sm",
+        "w-9 max-w-9 sm:w-10 sm:max-w-10 h-11 sm:h-12 flex items-center justify-center rounded font-bold text-white transition-colors hover:opacity-70 active:scale-95 text-xs sm:text-sm",
         {
           "bg-green-500": state === "correct",
           "bg-yellow-400": state === "present",
