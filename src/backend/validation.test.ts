@@ -20,6 +20,11 @@ describe("validateGuess", () => {
     expect(correct).toContainEqual({ letter: "i", position: 1 });
     expect(correct).toContainEqual({ letter: "y", position: 4 });
   });
+  test("present letters can contain duplicates", () => {
+    const { present } = validateGuess("parter", "pranie");
+    expect(present).toContainEqual({ letter: "r", position: 2 });
+    expect(present).toContainEqual({ letter: "r", position: 5 });
+  });
   test("present letters already in correct", () => {
     const { correct, present, absent } = validateGuess("grader", "graves");
 
