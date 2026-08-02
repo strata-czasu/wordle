@@ -98,10 +98,9 @@ function WordleInner() {
     async (e: KeyboardEvent) => {
       if (gameData?.state !== "inProgress") return;
 
-      // Allow key repeat on backspace, but stop for anything else
       if (e.key === "Backspace") {
         handleBackspace();
-      } else if (e.repeat) return;
+      }
 
       if (e.key === "Enter") {
         await handleEnter();
