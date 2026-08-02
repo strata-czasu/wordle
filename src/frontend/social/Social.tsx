@@ -37,22 +37,24 @@ export function SocialSidebar({ accessToken }: SocialSidebarProps) {
   return (
     <div className="flex flex-col gap-2">
       {sortedGames.map((game) => (
-        <div
-          key={game.id}
-          className="flex flex-col max-w-min items-center gap-2 bg-mist-800 p-2 border-2 border-gray-600 rounded-lg"
-        >
-          <div className="w-15 aspect-square rounded-full border border-gray-600 overflow-hidden">
-            <img
-              className="w-full h-full"
-              // TODO)) Display actual user avatar
-              src={require("../logo.svg")}
-              alt={`Avatar ${game.userId}`}
-            />
-          </div>
-          <GuessGrid game={game} />
-          {/* TODO: "Share" button under own guess */}
-        </div>
+        <SocialCard key={game.id} game={game} />
       ))}
+    </div>
+  );
+}
+
+function SocialCard({ game }: { game: SocialGameDetail }) {
+  const displayName = game.user.globalName ?? game.user.username;
+  return (
+    <div
+      className="flex flex-col max-w-min items-center gap-2 bg-mist-800 p-2 border-2 border-gray-600 rounded-lg"
+      title={displayName}
+    >
+      <div className="w-15 aspect-square rounded-full  overflow-hidden">
+        <img className="w-full h-full" src={game.user.avatarURL} alt={displayName} />
+      </div>
+      <GuessGrid game={game} />
+      {/* TODO: "Share" button under own guess */}
     </div>
   );
 }

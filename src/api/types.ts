@@ -14,6 +14,13 @@ export type GameDetail = {
   guesses: GuessDetail[];
 };
 
+export type User = {
+  id: string;
+  username: string;
+  globalName: string | null;
+  avatarURL: string;
+};
+
 /**
  * Other player's game with redacted details
  */
@@ -22,6 +29,8 @@ export type SocialGameDetail = {
   createdAt: Date;
   updatedAt: Date | null;
   userId: string;
+  user: User;
+  guildId: string;
   state: GameState;
   guesses: RedactedGuess[];
 };

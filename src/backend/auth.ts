@@ -1,3 +1,4 @@
+import { MOCK_USER_ID } from "@/constants";
 import env from "@/env";
 import { REST } from "@discordjs/rest";
 import type { BunRequest } from "bun";
@@ -45,8 +46,7 @@ export const authApi = {
           );
         }
       } else {
-        // NOTE: Using the same string as `DiscordSDKMock`
-        userId = "mock_user_id";
+        userId = MOCK_USER_ID;
       }
 
       const jwtExpiry = add(new Date(), { hours: 1 });
