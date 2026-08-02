@@ -35,11 +35,9 @@ export function App() {
     // TODO)) Ensure we're never overflowing - shrink the whole page if needed for smaller screens
     <div className="w-full h-screen p-2 sm:p-4 md:p-8 text-center flex flex-col justify-center">
       {discordSdk.guildId && authSession && accessToken ? (
-        <div className="grid grid-cols-[1fr_auto_1fr] gap-2">
-          <div>
-            <div className="max-sm:hidden">
-              <SocialSidebar accessToken={accessToken} />
-            </div>
+        <div className="grid grid-cols-[1fr_auto_1fr] max-sm:grid-cols-1 gap-2">
+          <div className="max-sm:hidden">
+            <SocialSidebar accessToken={accessToken} />
           </div>
           <div>
             <Wordle
@@ -49,7 +47,7 @@ export function App() {
             />
           </div>
           {/* NOTE: 3rd grid column just to balance out the layout */}
-          <div />
+          <div className="max-sm:hidden" />
         </div>
       ) : (
         <div>
