@@ -36,9 +36,10 @@ export function App() {
     <div className="w-full h-screen p-2 sm:p-4 md:p-8 text-center flex flex-col justify-center">
       {discordSdk.guildId && authSession && accessToken ? (
         <div className="grid grid-cols-[1fr_auto_1fr] gap-2">
-          {/* TODO)) Hide sidebar on mobile screens */}
           <div>
-            <SocialSidebar accessToken={accessToken} />
+            <div className="max-sm:hidden">
+              <SocialSidebar accessToken={accessToken} />
+            </div>
           </div>
           <div>
             <Wordle
