@@ -33,7 +33,7 @@ export function App() {
 
   return (
     // TODO)) Ensure we're never overflowing - shrink the whole page if needed for smaller screens
-    <div className="w-full h-screen p-2 sm:p-4 md:p-8 text-center flex flex-col justify-center">
+    <div className="w-full h-full p-2 sm:p-4 md:p-8 text-center flex flex-col justify-center">
       {discordSdk.guildId && authSession && accessToken ? (
         <div className="grid grid-cols-[1fr_auto_1fr] max-sm:grid-cols-1 gap-2">
           <div className="max-sm:hidden">

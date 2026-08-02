@@ -6,7 +6,7 @@
   }
 
   body {
-    @apply grid min-w-[280px] min-h-screen relative m-0;
+    @apply grid min-w-[280px] min-h-dvh relative m-0;
   }
 }
 
