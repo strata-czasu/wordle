@@ -73,9 +73,7 @@ async function handleApplicationCommand(msg: APIApplicationCommandInteraction) {
       });
     }
 
-    console.log(userId, guildId);
     const game = await getCurrentGame(userId, guildId);
-    console.log(game);
     if (!game || game.state === GameState.inProgress) {
       return Response.json({
         type: InteractionResponseType.ChannelMessageWithSource,
