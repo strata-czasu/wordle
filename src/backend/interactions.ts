@@ -60,7 +60,7 @@ async function handleApplicationCommand(msg: APIApplicationCommandInteraction) {
     });
   }
 
-  if (msg.data.name === "share") {
+  if (msg.data.name === "wynik") {
     const guildId = msg.guild_id;
     const userId = msg.member?.user?.id;
     if (!guildId || !userId) {

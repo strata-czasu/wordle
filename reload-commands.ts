@@ -10,13 +10,13 @@ const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [
   {
     type: ApplicationCommandType.ChatInput,
     name: "wordle",
-    description: "Graj w Wordle",
+    description: "Graj w Wordle Straty Czasu",
     contexts: [InteractionContextType.Guild],
   },
   {
     type: ApplicationCommandType.ChatInput,
-    name: "share",
-    description: "Udostępnij swój dzisiejszy wynik Wordle",
+    name: "wynik",
+    description: "Udostępnij swój dzisiejszy wynik",
     contexts: [InteractionContextType.Guild],
   },
 ] as const;
