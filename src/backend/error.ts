@@ -31,26 +31,6 @@ export class UnauthorizedError extends ApiError {
   }
 }
 
-export class GameNotActiveError extends ApiError {
-  status = 404;
-
-  json() {
-    return { message: "Game is not active" };
-  }
-}
-
-export class GameAlreadyActiveError extends ApiError {
-  status = 400;
-
-  constructor(readonly gameId: number) {
-    super();
-  }
-
-  json() {
-    return { message: "A game is already active", gameId: this.gameId };
-  }
-}
-
 export class GameAlreadyFinishedError extends ApiError {
   status = 400;
 

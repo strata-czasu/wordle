@@ -6,12 +6,7 @@ import type { GameWithGuesses } from "@/db/game";
 import type { BunRequest } from "bun";
 import { endOfDay, startOfToday } from "date-fns";
 import * as v from "valibot";
-import {
-  GameAlreadyActiveError,
-  GameAlreadyFinishedError,
-  GameNotActiveError,
-  NotFoundError,
-} from "./error";
+import { GameAlreadyFinishedError, NotFoundError } from "./error";
 import { authenticateRequest } from "./util";
 
 const GameGuessRequestSchema = v.object({
@@ -37,12 +32,14 @@ function serializeGame(game: GameWithGuesses): GameDetail {
 }
 
 export const gameApi = {
-  "/api/game/new": {
-    async POST(req: BunRequest<"/api/game/new">): Promise<Response> {
+  "/api/game/current": {
+    async GET(req: BunRequest<"/api/game/current">): Promise<Response> {
       const { userId, guildId } = await authenticateRequest(req);
 
       const currentGame = await getCurrentGame(userId, guildId);
-      if (currentGame) throw new GameAlreadyActiveError(currentGame.id);
+      if (currentGame) {
+        return Response.json(serializeGame(currentGame));
+      }
 
       const solution = await getRandomWord(userId, guildId);
       const newGame = await prisma.game.create({
@@ -54,17 +51,7 @@ export const gameApi = {
         include: { guesses: true },
       });
 
-      return Response.json(serializeGame(newGame), { status: 201 });
-    },
-  },
-  "/api/game/current": {
-    async GET(req: BunRequest<"/api/game/current">): Promise<Response> {
-      const { userId, guildId } = await authenticateRequest(req);
-
-      const game = await getCurrentGame(userId, guildId);
-      if (!game) throw new GameNotActiveError();
-
-      return Response.json(serializeGame(game));
+      return Response.json(serializeGame(newGame));
     },
   },
   "/api/game/guess": {

@@ -1,4 +1,4 @@
-import { getCurrentGame, startNewGame, submitGuess } from "@/api/game";
+import { getCurrentGame, submitGuess } from "@/api/game";
 import type { GameDetail, GuessDetail } from "@/api/types";
 import { WORDLE_ATTEMPTS, WORDLE_WORD_LENGTH } from "@/constants";
 import { getShareText } from "@/util/sharing";
@@ -286,8 +286,7 @@ export function WordleContextProvider({
     if (gameData) return;
 
     const inner = async () => {
-      const game = await getOrCreateGame(accessToken);
-      if (!game) throw new Error("Failed to load or start game");
+      const game = await getCurrentGame(accessToken);
       setGameData(game);
     };
 
@@ -350,20 +349,4 @@ export function useWordleState() {
       }
     },
   };
-}
-
-async function getOrCreateGame(accessToken: string) {
-  const activeGame = await getCurrentGame(accessToken);
-  if (activeGame) {
-    console.debug("Active game found", activeGame.id);
-    return activeGame;
-  }
-
-  const newGame = await startNewGame(accessToken);
-  if (newGame) {
-    console.debug("New game started", newGame.id);
-    return newGame;
-  }
-
-  return null;
 }
