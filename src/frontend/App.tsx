@@ -36,7 +36,9 @@ export function App() {
     <div className="w-full h-full p-2 sm:p-4 text-center flex flex-col justify-center">
       {discordSdk.guildId && authSession && accessToken ? (
         <div className="grid grid-cols-[1fr_auto_1fr] max-sm:grid-cols-1 gap-2">
-          <div className="max-sm:hidden">
+          {/* NOTE: h-0 stops this container from expanding the outer grid and
+              min-h-full manually sets it to the full height */}
+          <div className="h-0 min-h-full w-min overflow-y-scroll no-scrollbar max-sm:hidden">
             <SocialSidebar accessToken={accessToken} />
           </div>
           <div>
