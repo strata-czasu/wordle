@@ -50,6 +50,9 @@ export const gameApi = {
         },
         include: { guesses: true },
       });
+      console.debug(
+        `[game] Started new game for user ${userId} in ${guildId}: ${newGame.id}`,
+      );
 
       return Response.json(serializeGame(newGame));
     },
@@ -70,10 +73,16 @@ export const gameApi = {
 
       const validatedGuess = validateGuess(guess, game.solution);
 
+      const newState = getNewGameState(game, guess);
+      if (newState !== game.state) {
+        console.debug(
+          `[game] State changed (${game.id}): ${game.state} -> ${newState}`,
+        );
+      }
       const updatedGame = await prisma.game.update({
         where: { id: game.id },
         data: {
-          state: getNewGameState(game, guess),
+          state: newState,
           guesses: {
             create: {
               index: game.guesses.length,
