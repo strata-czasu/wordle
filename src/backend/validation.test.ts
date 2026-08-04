@@ -8,11 +8,10 @@ describe("validateGuess", () => {
     expect(absent).toContain("s");
   });
   test("present letters", () => {
-    const { present } = validateGuess("tests", "stray");
+    const { present } = validateGuess("tesco", "stray");
+    expect(present).toHaveLength(2);
     expect(present).toContainEqual({ letter: "t", position: 0 });
     expect(present).toContainEqual({ letter: "s", position: 2 });
-    expect(present).toContainEqual({ letter: "t", position: 3 });
-    expect(present).toContainEqual({ letter: "s", position: 4 });
   });
   test("correct letters", () => {
     const { correct } = validateGuess("fishy", "fizzy");
@@ -20,10 +19,16 @@ describe("validateGuess", () => {
     expect(correct).toContainEqual({ letter: "i", position: 1 });
     expect(correct).toContainEqual({ letter: "y", position: 4 });
   });
-  test("present letters can contain duplicates", () => {
-    const { present } = validateGuess("parter", "pranie");
+  test("present letters up to the first duplicate", () => {
+    const { correct, present } = validateGuess("parter", "pranie");
+    expect(correct).toHaveLength(1);
+    expect(correct).toContainEqual({ letter: "p", position: 0 });
+    expect(present).toHaveLength(3);
+    expect(present).toContainEqual({ letter: "a", position: 1 });
     expect(present).toContainEqual({ letter: "r", position: 2 });
-    expect(present).toContainEqual({ letter: "r", position: 5 });
+    expect(present).toContainEqual({ letter: "e", position: 4 });
+    // "r" at position 5 is not present - solution has only one "r",
+    // and we already counted the "r" at position 2 as present.
   });
   test("present letters already in correct", () => {
     const { correct, present, absent } = validateGuess("grader", "graves");
@@ -54,6 +59,29 @@ describe("validateGuess", () => {
     expect(absent).toHaveLength(2);
     expect(absent).toContain("m");
     expect(absent).toContain("n");
+  });
+  test("correct letters are not repeated as present", () => {
+    const { correct, present } = validateGuess("balony", "zabawa");
+
+    expect(correct).toHaveLength(1);
+    expect(correct).toContainEqual({ letter: "a", position: 1 });
+
+    // "a" at position 1 is correct, but we can't mark positions
+    // 3 and 5 as present, because the guess only has one "a"
+    expect(present).toHaveLength(1);
+    expect(present).toContainEqual({ letter: "b", position: 0 });
+  });
+  test("leftover letter is reported present at a non-correct position", () => {
+    const { correct, present } = validateGuess("kartka", "klikaj");
+
+    expect(correct).toHaveLength(1);
+    expect(correct).toContainEqual({ letter: "k", position: 0 });
+
+    expect(present).toHaveLength(2);
+    expect(present).toContainEqual({ letter: "a", position: 1 });
+    // Solution has two "k"s, and the second one is still unguessed.
+    // Guess also has two "k"s, so the second one is marked as present.
+    expect(present).toContainEqual({ letter: "k", position: 4 });
   });
 });
 
