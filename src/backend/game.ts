@@ -15,7 +15,12 @@ import {
 import { authenticateRequest } from "./util";
 
 const GameGuessRequestSchema = v.object({
-  guess: v.pipe(v.string(), v.length(WORDLE_WORD_LENGTH)),
+  guess: v.pipe(
+    v.string(),
+    v.toLowerCase(),
+    v.length(WORDLE_WORD_LENGTH),
+    v.regex(/^[a-z]+$/),
+  ),
 });
 
 function serializeGame(game: GameWithGuesses): GameDetail {
