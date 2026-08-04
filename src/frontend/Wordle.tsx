@@ -342,7 +342,7 @@ export function useWordleState() {
         currentRow?.classList.add("wave");
         setTimeout(() => currentRow?.classList.remove("wave"), 700);
 
-        const res = await submitGuess(context.accessToken, context.gameData.id, guess);
+        const res = await submitGuess(context.accessToken, guess);
         context.setGameData(res);
         context.setPendingInput("");
       } finally {

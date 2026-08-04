@@ -62,8 +62,8 @@ export const gameApi = {
       return Response.json(serializeGame(game));
     },
   },
-  "/api/game/:id/guess": {
-    async POST(req: BunRequest<"/api/game/:id/guess">): Promise<Response> {
+  "/api/game/guess": {
+    async POST(req: BunRequest<"/api/game/guess">): Promise<Response> {
       const { userId, guildId } = await authenticateRequest(req);
 
       const { guess } = v.parse(GameGuessRequestSchema, await req.json());

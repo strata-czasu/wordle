@@ -34,8 +34,8 @@ export async function getCurrentGame(accessToken: string) {
   return res.json() as Promise<GameDetail>;
 }
 
-export async function submitGuess(accessToken: string, gameId: number, guess: string) {
-  const res = await fetch(`/api/game/${gameId}/guess`, {
+export async function submitGuess(accessToken: string, guess: string) {
+  const res = await fetch("/api/game/guess", {
     method: "POST",
     headers: { "Content-Type": "application/json", ...getAuthHeaders(accessToken) },
     body: JSON.stringify({ guess }),
