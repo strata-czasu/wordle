@@ -34,6 +34,8 @@ const server = serve({
     if (error instanceof ApiError) {
       return Response.json(error.json(), { status: error.status });
     }
+    console.error("Unhandled error:");
+    console.error(error);
     throw error;
   },
 
