@@ -135,7 +135,7 @@ const KeyboardKey = React.memo(function KeyboardKey({
       type="button"
       onClick={onClick}
       className={clsx([
-        "w-9 max-w-9 sm:w-10 sm:max-w-10 h-11 sm:h-12 flex items-center justify-center rounded font-bold text-white transition-colors hover:opacity-70 active:scale-95 text-xs sm:text-sm",
+        "w-9 max-w-9 sm:w-10 sm:max-w-10 h-11 sm:h-12 flex items-center justify-center select-none rounded font-bold text-white transition-colors hover:opacity-70 active:scale-95 text-xs sm:text-sm",
         {
           "bg-green-500": state === "correct",
           "bg-yellow-400": state === "present",
